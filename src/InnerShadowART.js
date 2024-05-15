@@ -1,7 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { ShadowARTType } from './types';
-import { Surface, Shape, Group } from '@react-native-community/art';
+// import { Surface, Shape, Group } from '@react-native-community/art';
+import Svg,{ Path, G } from 'react-native-svg';
 import { getPathWithRadius, transformShadowPropsForAndroid } from './helpers';
 
 export default class InnerShadowART extends React.PureComponent {
@@ -10,18 +11,18 @@ export default class InnerShadowART extends React.PureComponent {
       width = 0,
       height = 0,
       borderRadius,
-      shadowRadius,
+      radius,
       shadowOffset,
-      shadowOpacity,
-      shadowColor,
+      opacity,
+      color,
       backgroundColor,
     } = this.props;
 
     const shadowProps = transformShadowPropsForAndroid({
-      shadowOpacity,
+      opacity,
       shadowOffset,
-      shadowRadius,
-      shadowColor,
+      radius,
+      color,
     });
 
     const absOffsetX = Math.abs(shadowOffset.x);
@@ -39,16 +40,16 @@ export default class InnerShadowART extends React.PureComponent {
     );
 
     return (
-      <Surface height={height} width={width} style={{ position: 'absolute' }}>
-        <Group x={-stroke / 2 - 1} y={-stroke / 2 - 1}>
-          <Shape
+      <Svg height={height} width={width} style={{ position: 'absolute' }}>
+        <G x={-stroke / 2 - 1} y={-stroke / 2 - 1}>
+          <Path
             d={path}
             strokeWidth={stroke}
             stroke={backgroundColor || 'white'}
             {...shadowProps}
           />
-        </Group>
-      </Surface>
+        </G>
+      </Svg>
     );
   }
 }

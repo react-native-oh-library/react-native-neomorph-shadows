@@ -1,7 +1,8 @@
 import React from 'react';
 import { ShadowARTType } from './types';
 import { StyleSheet } from 'react-native';
-import { Surface, Shape, Group } from '@react-native-community/art';
+// import { Surface, Shape, Group } from '@react-native-community/art';
+import Svg,{ Path, G } from 'react-native-svg';
 import { getPathWithRadius, transformShadowPropsForAndroid } from './helpers';
 
 export default class OuterShadowART extends React.PureComponent {
@@ -10,18 +11,18 @@ export default class OuterShadowART extends React.PureComponent {
       width = 0,
       height = 0,
       borderRadius,
-      shadowRadius,
+      radius,
       shadowOffset,
-      shadowOpacity,
-      shadowColor,
+      opacity,
+      color,
       backgroundColor,
     } = this.props;
 
     const shadowProps = transformShadowPropsForAndroid({
-      shadowOpacity,
+      opacity,
       shadowOffset,
-      shadowRadius,
-      shadowColor,
+      radius,
+      color,
     });
 
     const path = getPathWithRadius(width, height, borderRadius);
@@ -29,17 +30,17 @@ export default class OuterShadowART extends React.PureComponent {
     const absOffsetY = Math.abs(shadowOffset.y);
 
     return (
-      <Surface
+      <Svg
         height={height + shadowRadius * 2 + absOffsetY * 2}
         width={width + shadowRadius * 2 + absOffsetX * 2}
         style={[
           styles.surface,
           { top: -shadowRadius - absOffsetY, left: -shadowRadius - absOffsetX },
         ]}>
-        <Group x={shadowRadius + absOffsetX} y={shadowRadius + absOffsetY}>
-          <Shape d={path} fill={backgroundColor} {...shadowProps} />
-        </Group>
-      </Surface>
+        <G x={shadowRadius + absOffsetX} y={shadowRadius + absOffsetY}>
+          <Path d={path} fill={backgroundColor} {...shadowProps} />
+        </G>
+      </Svg>
     );
   }
 }
