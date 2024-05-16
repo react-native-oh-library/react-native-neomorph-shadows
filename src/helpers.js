@@ -34,8 +34,10 @@ export function transformStyleProps(styleProps, neomorph) {
     width,
     height,
     borderRadius = 0,
-    backgroundColor,
-    shadowOpacity = neomorph ? 0 : 1,
+    fill,
+    fillOpacity = neomorph ? 0 : 1,
+    stopColor,//渐变结束的颜色
+    startColor,//渐变开始的颜色
     shadowOffset = { width: 0, height: 0 },
     shadowRadius,
     shadowColor,
@@ -122,9 +124,11 @@ export function transformStyleProps(styleProps, neomorph) {
       width,
       height,
       borderRadius: borderRadius < 0 ? 0 : borderRadius,
-      backgroundColor:
-        backgroundColor === 'transparent' ? '#00000000' : backgroundColor,
-      shadowOpacity,
+      fill:
+        fill === 'transparent' ? '#00000000' : fill,
+      fillOpacity,
+      stopColor,//渐变结束的颜色
+      startColor,//渐变开始的颜色
       shadowOffset: { x: shadowOffset.width, y: shadowOffset.height },
       shadowRadius: shadowRadius ? shadowRadius * 2 : 0.1,
       shadowColor,
