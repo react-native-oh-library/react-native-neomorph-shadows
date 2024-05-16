@@ -21,7 +21,7 @@ export function getPathWithRadius(width, height, borderRadius) {
 export function transformShadowPropsForAndroid(props) {
   const shadowProps = { ...props };
   if (Platform.OS === 'android') {
-    shadowProps.radius = props.radius * 2;
+    shadowProps.shadowRadius = props.shadowRadius * 2;
     shadowProps.shadowOffset.x = props.shadowOffset.x * 3;
     shadowProps.shadowOffset.y = props.shadowOffset.y * 3;
   }

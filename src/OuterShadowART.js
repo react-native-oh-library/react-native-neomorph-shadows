@@ -11,7 +11,7 @@ export default class OuterShadowART extends React.PureComponent {
       width = 0,
       height = 0,
       borderRadius,
-      radius,
+      shadowRadius,
       shadowOffset,
       opacity,
       color,
@@ -21,7 +21,7 @@ export default class OuterShadowART extends React.PureComponent {
     const shadowProps = transformShadowPropsForAndroid({
       opacity,
       shadowOffset,
-      radius,
+      shadowRadius,
       color,
     });
 
